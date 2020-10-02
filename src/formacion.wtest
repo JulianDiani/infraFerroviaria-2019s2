@@ -1,0 +1,35 @@
+import formacion.*
+import vagones.*
+test "vagon1" {
+
+	const vag1= new VagonDePasajeros(largo=10,ancho=4,tieneBanios=true,estaOrdenado=true)
+	assert.equals(vag1.cantidadDePasajeros(),100)
+	assert.equals(vag1.pesoMaximo(),10300)
+	assert.equals(vag1.cargaMaxima(),300)
+	assert.equals(vag1.tieneBanios(),true)
+
+}
+test "vagon2"{
+	const vag2=new VagonDePasajeros(largo=7,ancho=2,estaOrdenado=false,tieneBanios=false)
+	assert.equals(vag2.cantidadDePasajeros(),41)
+	assert.equals(vag2.pesoMaximo(),6080)
+	assert.equals(vag2.cargaMaxima(),800)
+	assert.equals(vag2.tieneBanios(),false)
+}
+
+test "vagon3"{
+	const vag3=new VagonDeCarga(maderasSueltas=5,cargaMaximaIdeal=6800)
+	assert.equals(vag3.cantidadDePasajeros(),0)
+	assert.equals(vag3.pesoMaximo(),6300)
+	assert.equals(vag3.cargaMaxima(),4800)
+	assert.equals(vag3.tieneBanios(),false)
+	
+}
+
+test "vagon4"{
+	const vag4=new VagonDormitorio(compartimientos=8,camasPorCompartimiento=3)
+	assert.equals(vag4.cantidadDePasajeros(),24)
+	assert.equals(vag4.pesoMaximo(),7120)
+	assert.equals(vag4.cargaMaxima(),1200)
+	assert.equals(vag4.tieneBanios(),true)
+}

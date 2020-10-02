@@ -1,38 +1,9 @@
-class Formacion{
-	var locomotoras=[]
-	var vagones=[]
-	method agregarVagon(vagon){
-		vagones.add(vagon)
-	}
-	method agregarLocomotora(locomotora){
-		locomotoras.add(locomotora)
-	}
-	method cantMaxPasajeros(){
-		return vagones.sum({vagon=>vagon.cantidadDePasajeros()})
-	}
-	method vagonesPopulares(){
-		return vagones.filter({vagon=>vagon.cantidadDePasajeros()>50}).size()
-	}
-	method esCarguera(){
-		return vagones.all({vagon=>vagon.cargaMaxima()>=1000})
-	}
-	method dispercionDePesos(){
-		return vagones.max({vagon=>vagon.pesoMaximo()})-vagones.min({vagon=>vagon.pesoMaximo()})
-	}
-	method cantidadDeBanios(){
-		return vagones.filter({vagon=>vagon.tieneBanio()}).size()
-	}
-	method mantenimientoGeneral(){
-		vagones.forEach({vagon=>vagon.mantenimiento()})
-	}
-}
-
 class VagonDePasajeros{
 	var property largo
 	var property ancho
 	var property tieneBanios
 	var property estaOrdenado
-	var pasajerosPorMt
+	var pasajerosPorMt=0
 	method cantidadDePasajeros(){
 		if(ancho<=3){
 			pasajerosPorMt=8
@@ -64,15 +35,17 @@ class VagonDeCarga{
 		return 1500+self.cargaMaxima()
 	}
 	method mantenimiento(){
-		maderasSueltas.max(0,maderasSueltas-2)
+		if(maderasSueltas>2){
+			maderasSueltas-=2
+		}else{maderasSueltas=0}
 	}
 	
 }
-class VagonesDormitorio{
+class VagonDormitorio{
 	var property compartimientos
 	var property camasPorCompartimiento
 	const property tieneBanios=true
-	const cargaMaxima=1200
+	const property cargaMaxima=1200
 	method cantidadDePasajeros(){
 		return compartimientos*camasPorCompartimiento
 	}

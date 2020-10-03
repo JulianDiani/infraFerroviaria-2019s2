@@ -33,3 +33,44 @@ test "vagon4"{
 	assert.equals(vag4.cargaMaxima(),1200)
 	assert.equals(vag4.tieneBanios(),true)
 }
+
+test "formacion1"{
+	const vag1= new VagonDePasajeros(largo=10,ancho=4,tieneBanios=true,estaOrdenado=true)
+	const vag2=new VagonDePasajeros(largo=7,ancho=2,estaOrdenado=false,tieneBanios=false)
+	const vag3=new VagonDeCarga(maderasSueltas=5,cargaMaximaIdeal=6800)
+	const vag4=new VagonDormitorio(compartimientos=8,camasPorCompartimiento=3)
+	const form1=new Formacion()
+	form1.agregarVagon(vag1)
+	form1.agregarVagon(vag2)
+	form1.agregarVagon(vag3)
+	form1.agregarVagon(vag4)
+	form1.mantenimientoGeneral()
+	assert.equals(180,form1.cantMaxPasajeros())
+	assert.equals(2,form1.vagonesPopulares())
+	assert.equals(false,form1.esCarguera())
+	assert.equals(3200,form1.dispersionDePesos())
+	assert.equals(2,form1.cantidadDeBanios())
+}
+
+test "formacion2"{
+	const form1=new Formacion()
+	const vag1=new VagonDeCarga(maderasSueltas=1,cargaMaximaIdeal=8000)
+	const vag2=new VagonDormitorio(compartimientos=15,camasPorCompartimiento=4)
+	form1.agregarVagon(vag1)
+	form1.agregarVagon(vag2)
+	assert.equals(60,form1.cantMaxPasajeros())
+	assert.equals(1,form1.vagonesPopulares())
+	assert.equals(true,form1.esCarguera())
+	assert.equals(900,form1.dispersionDePesos())
+	assert.equals(1,form1.cantidadDeBanios())
+	form1.mantenimientoGeneral()
+	assert.equals(60,form1.cantMaxPasajeros())
+	assert.equals(1,form1.vagonesPopulares())
+	assert.equals(true,form1.esCarguera())
+	assert.equals(500,form1.dispersionDePesos())
+	assert.equals(1,form1.cantidadDeBanios())
+	
+	
+}
+
+

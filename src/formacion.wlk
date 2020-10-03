@@ -1,4 +1,5 @@
 import vagones.*
+import locomotoras.*
 class Formacion{
 	var locomotoras=[]
 	var vagones=[]
@@ -51,5 +52,24 @@ class Formacion{
 			orden.addAll(vagonesConPasajeros)
 			orden.addAll(vagonesSinPasajeros)
 			return orden==vagones
+	}
+	
+	method velocidadMaxima(){
+		return locomotoras.map({locomotora=>locomotora.velocidadMaxima()}).min()
+	}
+	method esEficiente(){
+		return locomotoras.all({locomotora=>locomotora.esEficiente()})
+	}
+	method totalDeArrastre(){
+		return locomotoras.sum({locomotora=>locomotora.arrastreMaximo()})
+	}
+	method pesoMaximo(){
+		return locomotoras.peso()+vagones.pesoMaximo()
+	}
+	method puedeMoverse(){
+		return self.totalDeArrastre()>=self.pesoMaximo()
+	}
+	method cuantosKgFaltan(){
+		return if(self.puedeMoverse()){0}else{self.pesoMaximo()-self.totalDeArrastre()}
 	}
 }
